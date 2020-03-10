@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import {APIService} from './api.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpRequest } from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
+import { HttpResponse } from "@angular/common/http";
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +13,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rooms';
+  rooms_object;
+  constructor(private api: APIService) {
+  }
+  getjson() {
+
+    this.api.getcian().subscribe(data => {
+      this.rooms_object = data['items'];
+      console.log(this.rooms_object);
+    });
+
+
+  }
 }
